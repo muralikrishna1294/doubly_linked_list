@@ -1,0 +1,57 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    
+    int data;
+    struct node *prev;
+    struct node *next;
+    
+};
+// 1 2 3
+struct node *head =NULL;
+
+struct node* create(int data){
+            struct node* new        =(struct node *)malloc(sizeof(struct node));    
+             new->data =data;
+             new->prev =NULL;
+             new->next =NULL;
+             return new;
+
+}
+void insert(int data){
+    
+            struct node* new    =create(data);
+            if(head ==NULL){
+                       head=new;
+            }else{
+                
+                
+                new->next =head;
+                head->prev =new;
+                head =new;
+                
+            }
+            
+}
+
+void display(){
+    struct node* temp =head;
+    while(temp!=NULL){
+        
+        printf(" %d",temp->data);
+        temp =temp->next;
+    }
+    
+}
+int main()
+{
+   
+     insert(5);
+     insert(15);
+     insert(25);
+     insert(20);
+     display();
+
+    return 0;
+}

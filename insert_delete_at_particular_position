@@ -1,0 +1,104 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    
+    int data;
+    struct node *prev;
+    struct node *next;
+    
+};
+// 1 2 3
+struct node *head =NULL;
+
+struct node* create(int data){
+            struct node* new        =(struct node *)malloc(sizeof(struct node));    
+             new->data =data;
+             new->prev =NULL;
+             new->next =NULL;
+             return new;
+
+}
+void insert(int data){
+    
+            struct node* new    =create(data);
+            if(head ==NULL){
+                       head=new;
+            }else{
+                
+                
+                new->next =head;
+                head->prev =new;
+                head =new;
+                
+            }
+            
+}
+
+void display(){
+    struct node* temp =head;
+    while(temp!=NULL){
+        
+        printf(" %d",temp->data);
+        temp =temp->next;
+    }
+    printf("\n");
+    
+}
+void delete_at_particular_positon(int data){
+    
+    int count =1;
+    struct node* temp =head;
+    struct node* prev_node =NULL;
+    while(temp!=NULL && count <data){
+        prev_node =temp;
+        temp=temp->next;
+        count++;
+        
+    }
+    prev_node->next =temp->next;
+    temp->prev =prev_node;
+    free(temp);
+    
+    
+}
+void insert_at_particular_position(int data){
+    
+    int count =1;
+    struct node* new    =create(25);
+    struct node* temp =head;
+    while(temp!=NULL && count<data){
+      temp=temp->next;
+      count++;
+  }
+  
+    new->next = temp->next;
+      new->prev = temp;
+      temp->next = new;
+ 
+}
+    
+    
+
+int main()
+{
+   
+     insert(5);
+     insert(15);
+     insert(25);
+     insert(20);
+     insert(40);
+     display();
+     delete_at_particular_positon(3);
+     display();
+     insert_at_particular_position(2);
+     display();
+    return 0;
+}

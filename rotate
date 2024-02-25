@@ -1,0 +1,94 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    
+    int data;
+    struct node* next;
+    struct node* prev;
+    
+};
+struct node* head =NULL;
+
+struct node* insert_node(int data){
+    
+            struct node* new        =(struct node*)malloc(sizeof(struct node));
+            new->data=data;
+            new->next =NULL;
+            new->prev=NULL;
+            return new;
+    
+}
+
+//1 2 3 4 
+void create_node(int data){
+    
+        struct node* new     = insert_node(data);
+    
+               if(head==NULL){
+                   
+                                head=new;
+                   
+               }else{
+                   
+                   new->next =head;
+                   head->prev =new;
+                   head =new;
+                   
+               }
+}
+void display(){
+
+     struct node* temp =head;
+     while(temp!=NULL){
+         
+         printf(" %d",temp->data);
+         temp=temp->next;
+     }
+ printf("\n");
+    
+}
+//  45 35 25 15 15
+//  25 15 5  45 35
+
+void rotate(int pos){
+    int count =1;
+    struct node* temp =head;
+    
+    while(temp!=NULL && count <pos){
+        
+        temp=temp->next;
+        count++;
+    }
+    struct node* k_node =temp;
+    while(temp->next!=NULL){
+        
+        temp=temp->next;
+    }
+    
+    temp->next =head;
+         head=k_node->next;
+         k_node->next =NULL;
+    
+}
+int main()
+{
+    
+            create_node(5);
+             create_node(15);
+              create_node(25);
+              create_node(35);
+              create_node(45);
+               display();
+              rotate(1);
+              display();
+    return 0;
+}
